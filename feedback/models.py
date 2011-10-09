@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sites import models as sites_models
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
@@ -15,7 +16,8 @@ class BaseFeedback(models.Model):
     type    = models.CharField(choices=settings.FEEDBACK_CHOICES, max_length=100, verbose_name=_('Type'))
     message = models.TextField(verbose_name=_('Message'))
     time    = models.DateTimeField(auto_now_add=True, verbose_name=_('Time'))
-    
+    site    = models.ForeignKey(sites_models.Site, verbose_name=_('Site'))
+
     def __unicode__(self):
         return self.message
 
