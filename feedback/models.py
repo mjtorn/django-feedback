@@ -26,7 +26,8 @@ class BaseFeedback(models.Model):
 
 
 class Feedback(BaseFeedback):
-    user = models.ForeignKey(User, verbose_name=_('User'))
+    user    = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, default=None)
+    email   = models.EmailField(verbose_name=_('Email'), null=True, blank=True, default=None)
 
 
 class AnonymousFeedback(BaseFeedback):
