@@ -4,7 +4,7 @@ from django.conf import settings
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 
-from feedback.models import Feedback, AnonymousFeedback
+from feedback.models import Feedback
 
 class FeedbackAdmin(admin.ModelAdmin):
     
@@ -12,7 +12,7 @@ class FeedbackAdmin(admin.ModelAdmin):
         return "<a href='%s'>View</a>" % obj.get_absolute_url()
     view.allow_tags = True
     
-    list_display = ['user', 'message', 'time', 'type', 'view']
+    list_display = ['site', 'user', 'message', 'time', 'type', 'view']
     search_fields = ['user', 'message']
     list_filter = ['type', 'time']
     
@@ -29,9 +29,6 @@ class FeedbackAdmin(admin.ModelAdmin):
             {'feedback': feedback}, context_instance=RequestContext(request))
 
 admin.site.register(Feedback, FeedbackAdmin)
-
-if getattr(settings, 'ALLOW_ANONYMOUS_FEEDBACK', False):
-    admin.site.register(AnonymousFeedback, FeedbackAdmin)
 
 admin.site.index_template = 'feedback/index.html'
 
