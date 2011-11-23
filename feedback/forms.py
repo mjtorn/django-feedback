@@ -4,7 +4,7 @@ from django import forms
 from feedback.models import Feedback
 
 class FeedbackForm(forms.ModelForm):
-    message = forms.CharField(help_text=_('Message'), widget=forms.widgets.TextInput(attrs={
+    message = forms.CharField(help_text=_('Message'), widget=forms.widgets.Textarea(attrs={
         'rows': 5,
     }))
 
